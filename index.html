@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>TODO APP</title>
+  <link rel="stylesheet" href="css/styles.css">
+
+  <style type="text/css">
+div#test{ 
+  border:#000 1px solid; 
+  padding:10px 40px 40px 40px; 
+  width:640px; 
+  margin:auto; 
+  border-radius:12px;
+  border-color: blue; 
+  background-color: blue; 
+  color: white;
+}
+</style>
+
+</head>
+<body>
+   <nav id="main">
+    <h1>TODO APP</h1>
+  </nav>
+
+
+  <nav class="top">
+    <div class="dropdownBackground">
+      <span class="arrow"></span>
+    </div>
+
+    <ul class="cool">
+      
+      <li>
+        <a href="#">Project Description</a>
+        <div class="dropdown dropdown1">
+          <div class="bio">
+            <!--<img src="https://logo.clearbit.com/wesbos.com"> -->
+            <p> TODO app using localStorage as the database </p>
+          </div>
+        </div>
+      </li>
+
+
+    </ul>
+  </nav>
+
+<div class="container">
+    <form class="todo-form">
+      <input type="text" class="todo-input" placeholder="Add a Todo...">
+      <button type="submit" class="add-button">Add</button>
+    </form>
+
+    <ul class="todo-items">
+      <!-- dummy item -->
+      <!-- <li class="item" data-key="1594003133171">
+        <input class="checkbox" type="checkbox">
+        Go to Gym
+        <button class="delete-button">X</button>
+      </li> -->
+    </ul>
+  </div>
+
+
+<script type="text/javascript" src="js/script.js"></script>
+
+
+
+
+<script>
+  const triggers = document.querySelectorAll('.cool > li');
+  const background  = document.querySelector('.dropdownBackground');
+  const nav  = document.querySelector('.top');
+
+  function handleEnter() {
+    this.classList.add('trigger-enter');
+    setTimeout(() => this.classList.contains('trigger-enter') && this.classList.add('trigger-enter-active'), 150);
+    background.classList.add('open');
+
+    const dropdown = this.querySelector('.dropdown');
+    const dropdownCoords = dropdown.getBoundingClientRect();
+    const navCoords = nav.getBoundingClientRect();
+
+    const coords = {
+      height: dropdownCoords.height,
+      width: dropdownCoords.width,
+      top: dropdownCoords.top - navCoords.top,
+      left: dropdownCoords.left - navCoords.left
+    };
+
+    background.style.setProperty('width', `${coords.width}px`);
+    background.style.setProperty('height', `${coords.height}px`);
+    background.style.setProperty('transform', `translate(${coords.left}px, ${coords.top}px)`);
+  }
+
+  function handleLeave() {
+    this.classList.remove('trigger-enter', 'trigger-enter-active');
+    background.classList.remove('open');
+  }
+
+  triggers.forEach(trigger => trigger.addEventListener('mouseenter', handleEnter));
+  triggers.forEach(trigger => trigger.addEventListener('mouseleave', handleLeave));
+</script>
+
+
+
+
+</body>
+</html>
